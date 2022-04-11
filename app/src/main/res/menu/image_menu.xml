@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/one" android:title="Set Wallpaper" android:iconTint="@color/white" android:icon="@drawable/ic_baseline_wallpaper_24"/>
+    <item android:id="@+id/two" android:title="Share" android:iconTint="@color/white" android:icon="@drawable/ic_baseline_share_24" />
+    <item android:id="@+id/download" android:title="Download" android:icon="@drawable/ic_baseline_cloud_download_24"/>
+</menu>
