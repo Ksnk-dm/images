@@ -1,4 +1,4 @@
-package com.ksnk.imageukr;
+package com.ksnk.imageukr.ui.images;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,7 +8,6 @@ import androidx.core.content.FileProvider;
 import android.Manifest;
 import android.app.WallpaperManager;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -17,10 +16,14 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.Settings;
 import android.view.MenuItem;
-import android.widget.Toast;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.github.chrisbanes.photoview.PhotoView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.ksnk.imageukr.BuildConfig;
+import com.ksnk.imageukr.instruments.PhotoLoader;
+import com.ksnk.imageukr.R;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
@@ -36,6 +39,9 @@ BottomNavigationView bottomNavigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         setContentView(R.layout.activity_show_image);
         if (Build.VERSION.SDK_INT >= 30){
             if (!Environment.isExternalStorageManager()){

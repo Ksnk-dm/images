@@ -1,4 +1,4 @@
-package com.ksnk.imageukr.adapter;
+package com.ksnk.imageukr.ui.main.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ksnk.imageukr.R;
-import com.ksnk.imageukr.ShowImageActivity;
+import com.ksnk.imageukr.ui.images.ShowImageActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;

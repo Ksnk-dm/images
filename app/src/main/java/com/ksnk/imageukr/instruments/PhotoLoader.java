@@ -1,4 +1,4 @@
-package com.ksnk.imageukr;
+package com.ksnk.imageukr.instruments;
 
 import android.content.Context;
 import android.graphics.Bitmap;

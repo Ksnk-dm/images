@@ -1,4 +1,4 @@
-package com.ksnk.imageukr.adapter;
+package com.ksnk.imageukr.ui.main.adapter;
 
 import android.view.View;
 import android.widget.ImageView;
