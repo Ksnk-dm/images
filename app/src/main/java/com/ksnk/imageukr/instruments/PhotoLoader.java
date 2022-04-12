@@ -1,8 +1,11 @@
 package com.ksnk.imageukr.instruments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.media.MediaScannerConnection;
+import android.net.Uri;
 import android.os.Environment;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -35,6 +38,8 @@ public class PhotoLoader implements Target {
             bitmap.compress(Bitmap.CompressFormat.JPEG, 75, ostream);
             ostream.close();
             Toast.makeText(context, "Done", Toast.LENGTH_SHORT).show();
+            MediaScannerConnection.scanFile(context, new String[]{file.getPath()}, new String[]{"image/*"}, null);
+
         } catch (Exception e) {
             Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
         }

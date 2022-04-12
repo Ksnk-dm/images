@@ -10,6 +10,7 @@ import android.app.WallpaperManager;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -123,6 +124,7 @@ BottomNavigationView bottomNavigationView;
             case R.id.download:
                 String name = UUID.randomUUID().toString()+".jpg";
                 Picasso.get() .load(getIntent().getStringExtra("url")) .into(new PhotoLoader(name , this));
+
                 break;
         }
     }
