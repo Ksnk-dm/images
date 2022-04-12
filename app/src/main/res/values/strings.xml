@@ -7,4 +7,6 @@
     <string name="menu_wallpaper">Встановити заставку</string>
     <string name="menu_share">Поділитися</string>
     <string name="menu_download">Завантажити</string>
+
+    <string name="popup_menu_title">Налаштування відображення:</string>
 </resources>

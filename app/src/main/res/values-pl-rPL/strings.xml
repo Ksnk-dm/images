@@ -8,4 +8,5 @@
     <string name="menu_wallpaper">Zainstaluj wygaszacz ekranu</string>
     <string name="menu_share">Udział</string>
     <string name="menu_download">Pobierać</string>
+    <string name="popup_menu_title">Ustawienia wyświetlania:</string>
 </resources>

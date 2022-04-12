@@ -19,9 +19,11 @@ import java.util.List;
 
 public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainViewHolder> {
     private List<String> items;
+    private int settings;
 
-    public MainRecyclerViewAdapter(List<String> items) {
+    public MainRecyclerViewAdapter(List<String> items, int settings) {
         this.items = items;
+        this.settings = settings;
     }
 
     @NonNull
@@ -29,9 +31,21 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainViewHolder
     public MainViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater =
                 (LayoutInflater) parent.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        return new MainViewHolder(
-                layoutInflater.inflate(
-                        R.layout.items_view, parent, false));
+        switch (settings) {
+            case 1:
+                return new MainViewHolder(
+                        layoutInflater.inflate(
+                                R.layout.items_view_1, parent, false));
+            case 2:
+                return new MainViewHolder(
+                        layoutInflater.inflate(
+                                R.layout.items_view_2, parent, false));
+            case 3:
+                return new MainViewHolder(
+                        layoutInflater.inflate(
+                                R.layout.items_view_3, parent, false));
+        }
+        return null;
     }
 
     @Override
@@ -65,7 +79,7 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainViewHolder
         Picasso.get().load(item).placeholder(circularProgressDrawable).into(holder.imageView);
     }
 
-    public void clearListItem(){
+    public void clearListItem() {
         items.clear();
     }
 }
