@@ -1,3 +1,13 @@
 <resources>
-    <string name="app_name">Imageukr</string>
+    <string name="app_name">Ukraine Wallpaper</string>
+    <string name="wallpaper_set">Заставку встановлено</string>
+    <string name="error">Помилка</string>
+    <string name="share">Оберіть додаток</string>
+    <string name="done">Завантажено</string>
+
+    <string name="menu_wallpaper">Встановити заставку</string>
+    <string name="menu_share">Поділитися</string>
+    <string name="menu_download">Завантажити</string>
+
+    <string name="popup_menu_title">Налаштування відображення:</string>
 </resources>

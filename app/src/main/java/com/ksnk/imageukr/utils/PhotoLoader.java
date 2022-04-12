@@ -1,12 +1,13 @@
-package com.ksnk.imageukr.instruments;
+package com.ksnk.imageukr.utils;
 
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.media.MediaScannerConnection;
 import android.os.Environment;
-import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.ksnk.imageukr.R;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
@@ -34,9 +35,11 @@ public class PhotoLoader implements Target {
             FileOutputStream ostream = new FileOutputStream(file);
             bitmap.compress(Bitmap.CompressFormat.JPEG, 75, ostream);
             ostream.close();
-            Toast.makeText(context, "Done", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, context.getString(R.string.done), Toast.LENGTH_SHORT).show();
+            MediaScannerConnection.scanFile(context, new String[]{file.getPath()}, new String[]{"image/*"}, null);
+
         } catch (Exception e) {
-            Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, context.getString(R.string.error), Toast.LENGTH_SHORT).show();
         }
     }
 

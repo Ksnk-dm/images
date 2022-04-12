@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/ukrko/AndroidStudioProjects/Imageukr/app/src/main/res/drawable/bg.xml" value="0.1" />
+        <entry key="..\:/Users/ukrko/AndroidStudioProjects/Imageukr/app/src/main/res/drawable/ic_baseline_share_24.xml" value="0.1" />
+        <entry key="..\:/Users/ukrko/AndroidStudioProjects/Imageukr/app/src/main/res/drawable/ic_baseline_wallpaper_24.xml" value="0.1" />
+        <entry key="..\:/Users/ukrko/AndroidStudioProjects/Imageukr/app/src/main/res/layout/activity_main.xml" value="0.4" />
+        <entry key="..\:/Users/ukrko/AndroidStudioProjects/Imageukr/app/src/main/res/layout/activity_show_image.xml" value="0.264" />
+        <entry key="..\:/Users/ukrko/AndroidStudioProjects/Imageukr/app/src/main/res/layout/items_view.xml" value="0.18541666666666667" />
+        <entry key="..\:/Users/ukrko/AndroidStudioProjects/Imageukr/app/src/main/res/layout/items_view_1.xml" value="0.1" />
+        <entry key="..\:/Users/ukrko/AndroidStudioProjects/Imageukr/app/src/main/res/layout/items_view_2.xml" value="0.11980749746707194" />
+        <entry key="..\:/Users/ukrko/AndroidStudioProjects/Imageukr/app/src/main/res/layout/popup_menu.xml" value="0.2" />
+        <entry key="..\:/Users/ukrko/AndroidStudioProjects/Imageukr/app/src/main/res/menu/image_menu.xml" value="0.1" />
+        <entry key="..\:/Users/ukrko/AndroidStudioProjects/Imageukr/app/src/main/res/xml/path.xml" value="0.10461956521739131" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
