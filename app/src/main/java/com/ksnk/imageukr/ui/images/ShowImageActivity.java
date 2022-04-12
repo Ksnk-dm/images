@@ -43,7 +43,7 @@ public class ShowImageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         hideStatusBar();
         setContentView(R.layout.activity_show_image);
-        checkPermission();
+       // checkPermission();
         init();
         setImage();
     }
