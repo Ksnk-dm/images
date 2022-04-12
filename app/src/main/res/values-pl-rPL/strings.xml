@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Ukraine Wallpaper</string>
+    <string name="wallpaper_set">Zainstalowany wygaszacz ekranu</string>
+    <string name="error">Błąd</string>
+    <string name="share">Wybierz aplikację</string>
+
+    <string name="menu_wallpaper">Zainstaluj wygaszacz ekranu</string>
+    <string name="menu_share">Udział</string>
+    <string name="menu_download">Pobierać</string>
+</resources>

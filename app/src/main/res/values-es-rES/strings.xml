@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Ukraine Wallpaper</string>
+    <string name="wallpaper_set">Salvapantallas instalado</string>
+    <string name="error">Error</string>
+    <string name="share">Seleccione la aplicación</string>
+
+    <string name="menu_wallpaper">Instalar el protector de pantalla</string>
+    <string name="menu_share">Cuota</string>
+    <string name="menu_download">Descargar</string>
+</resources>

@@ -8,9 +8,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ksnk.imageukr.R;
 
-public class AdapterViewHolder extends RecyclerView.ViewHolder{
+public class MainViewHolder extends RecyclerView.ViewHolder{
     public ImageView imageView;
-    public AdapterViewHolder(@NonNull View itemView) {
+    public MainViewHolder(@NonNull View itemView) {
         super(itemView);
         imageView=itemView.findViewById(R.id.imageView);
     }

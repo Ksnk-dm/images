@@ -11,36 +11,37 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ksnk.imageukr.R;
 import com.ksnk.imageukr.ui.images.ShowImageActivity;
+import com.ksnk.imageukr.utils.Contains;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class AdapterRecyclerViewAdapter extends RecyclerView.Adapter<AdapterViewHolder> {
+public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainViewHolder> {
     private List<String> items;
 
-    public AdapterRecyclerViewAdapter(List<String> items) {
+    public MainRecyclerViewAdapter(List<String> items) {
         this.items = items;
     }
 
     @NonNull
     @Override
-    public AdapterViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MainViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater =
                 (LayoutInflater) parent.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        return new AdapterViewHolder(
+        return new MainViewHolder(
                 layoutInflater.inflate(
                         R.layout.items_view, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdapterViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MainViewHolder holder, int position) {
         String item = getItem(position);
         Picasso.get().load(item).into(holder.imageView);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), ShowImageActivity.class);
-                intent.putExtra("url", item);
+                intent.putExtra(Contains.URL_IMAGE, item);
                 view.getContext().startActivity(intent);
             }
         });

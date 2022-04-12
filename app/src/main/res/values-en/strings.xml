@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Ukraine Wallpaper</string>
+    <string name="wallpaper_set">Screensaver installed</string>
+    <string name="error">Error</string>
+    <string name="share">Select the application</string>
+
+    <string name="menu_wallpaper">Install the screen saver</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_download">Download</string>
+</resources>
