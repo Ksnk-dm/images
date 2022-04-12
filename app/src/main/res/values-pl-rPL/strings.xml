@@ -4,7 +4,7 @@
     <string name="wallpaper_set">Zainstalowany wygaszacz ekranu</string>
     <string name="error">Błąd</string>
     <string name="share">Wybierz aplikację</string>
-
+    <string name="done"> Przesłane </string>
     <string name="menu_wallpaper">Zainstaluj wygaszacz ekranu</string>
     <string name="menu_share">Udział</string>
     <string name="menu_download">Pobierać</string>
