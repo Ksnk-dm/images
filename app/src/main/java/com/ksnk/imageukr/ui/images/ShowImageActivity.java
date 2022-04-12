@@ -2,11 +2,15 @@ package com.ksnk.imageukr.ui.images;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.WallpaperManager;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -14,6 +18,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
@@ -43,7 +48,22 @@ public class ShowImageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         hideStatusBar();
         setContentView(R.layout.activity_show_image);
-        checkPermission();
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+
+            } else {
+
+
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 23
+                );
+            }
+        }
+        //  checkPermission();
         init();
         setImage();
     }
@@ -114,7 +134,7 @@ public class ShowImageActivity extends AppCompatActivity {
             public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
                 Intent share = new Intent(Intent.ACTION_SEND);
                 share.putExtra(Intent.EXTRA_STREAM, getTempBitmapUri(bitmap));
-                share.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                share.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                 share.setType("image/*");
                 startActivity(Intent.createChooser(share, getString(R.string.share)));
             }
@@ -155,10 +175,12 @@ public class ShowImageActivity extends AppCompatActivity {
     private Uri getTempBitmapUri(Bitmap bitmap) {
         Uri bmuri = null;
         try {
-            File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + File.separator + "image.jpg");
-            FileOutputStream fileOutputStream = new FileOutputStream(file);
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 90, fileOutputStream);
-            fileOutputStream.close();
+            File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
+                    System.currentTimeMillis() + ".jpg");
+            Log.d("directtt", Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/" + "image.jpg");
+            file.createNewFile();
+            FileOutputStream ostream = new FileOutputStream(file);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 75, ostream);
             bmuri = FileProvider.getUriForFile(this, BuildConfig.APPLICATION_ID + ".provider", file);
         } catch (IOException e) {
             e.printStackTrace();
