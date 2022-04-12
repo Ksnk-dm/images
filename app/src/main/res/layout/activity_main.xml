@@ -9,6 +9,26 @@
     android:orientation="vertical"
     tools:context=".ui.main.MainActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme" >
+
+        <ImageButton
+            android:id="@+id/settings_image_button"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="right"
+            android:layout_marginRight="15dp"
+            android:background="?actionBarItemBackground"
+            app:srcCompat="@drawable/ic_baseline_more_vert_24" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/image_recycler_view"
         android:layout_width="match_parent"

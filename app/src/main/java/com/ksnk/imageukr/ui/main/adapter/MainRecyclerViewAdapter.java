@@ -64,4 +64,8 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainViewHolder
         circularProgressDrawable.start();
         Picasso.get().load(item).placeholder(circularProgressDrawable).into(holder.imageView);
     }
+
+    public void clearListItem(){
+        items.clear();
+    }
 }
