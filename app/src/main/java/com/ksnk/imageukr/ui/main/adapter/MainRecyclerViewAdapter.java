@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable;
 
 import com.ksnk.imageukr.R;
 import com.ksnk.imageukr.ui.images.ShowImageActivity;
@@ -36,7 +37,7 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainViewHolder
     @Override
     public void onBindViewHolder(@NonNull MainViewHolder holder, int position) {
         String item = getItem(position);
-        Picasso.get().load(item).into(holder.imageView);
+        loadPicasso(item, holder);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -54,5 +55,13 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainViewHolder
 
     private String getItem(int position) {
         return items.get(position);
+    }
+
+    private void loadPicasso(String item, MainViewHolder holder) {
+        CircularProgressDrawable circularProgressDrawable = new CircularProgressDrawable(holder.imageView.getContext());
+        circularProgressDrawable.setStrokeWidth(5f);
+        circularProgressDrawable.setCenterRadius(30f);
+        circularProgressDrawable.start();
+        Picasso.get().load(item).placeholder(circularProgressDrawable).into(holder.imageView);
     }
 }

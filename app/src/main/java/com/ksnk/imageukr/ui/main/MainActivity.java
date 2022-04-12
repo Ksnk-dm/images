@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void initRecycler() {
         ImagesStore imagesStore = new ImagesStore();
-        layoutManager = new GridLayoutManager(this, 2);
+        layoutManager = new GridLayoutManager(this, 3);
         recyclerView.setLayoutManager(layoutManager);
         mAdapter = new MainRecyclerViewAdapter(imagesStore.getImagesList());
         recyclerView.setAdapter(mAdapter);
