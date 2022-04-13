@@ -9,6 +9,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.ksnk.imageukr.R;
 import com.ksnk.imageukr.listeners.UpdateRecyclerListener;
 import com.ksnk.imageukr.ui.menu.MainPopupMenu;
@@ -24,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements UpdateRecyclerLis
     private ImageButton settingImageButton;
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
+    private AdView adView;
     private int span;
 
 
@@ -35,12 +42,28 @@ public class MainActivity extends AppCompatActivity implements UpdateRecyclerLis
         initSharedPrefs();
         span = sharedPreferences.getInt(Contains.PREFERENCE_VARIABLE_SETTINGS, 2);
         initRecycler(span);
+        initBanner();
+    }
+
+    private void initBanner() {
+        adView.loadAd(initAdRequest());
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+        adView.loadAd(initAdRequest());
+    }
+
+    private AdRequest initAdRequest() {
+        return new AdRequest.Builder().build();
     }
 
     private void init() {
         recyclerView = findViewById(R.id.image_recycler_view);
         settingImageButton = findViewById(R.id.settings_image_button);
         settingImageButton.setOnClickListener(settingImageButtonOnClickListener);
+        adView = findViewById(R.id.adView);
     }
 
     private final View.OnClickListener settingImageButtonOnClickListener = new View.OnClickListener() {
@@ -55,7 +78,7 @@ public class MainActivity extends AppCompatActivity implements UpdateRecyclerLis
         ImagesStore imagesStore = new ImagesStore();
         layoutManager = new GridLayoutManager(this, span);
         recyclerView.setLayoutManager(layoutManager);
-        mAdapter = new MainRecyclerViewAdapter(imagesStore.getImagesList(),span);
+        mAdapter = new MainRecyclerViewAdapter(imagesStore.getImagesList(), span);
         recyclerView.setAdapter(mAdapter);
     }
 
