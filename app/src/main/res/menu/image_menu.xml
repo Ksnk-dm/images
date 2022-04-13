@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
         android:id="@+id/set_wallpaper_item"
         android:icon="@drawable/ic_baseline_wallpaper_24"
         android:iconTint="@color/white"
-        android:title="@string/menu_wallpaper" />
+        tools:ignore="MenuTitle" />
     <item
         android:id="@+id/share_wallpaper_item"
         android:icon="@drawable/ic_baseline_share_24"
         android:iconTint="@color/white"
-        android:title="@string/menu_share" />
+        tools:ignore="MenuTitle" />
     <item
         android:id="@+id/download_item"
         android:icon="@drawable/ic_baseline_cloud_download_24"
-        android:title="@string/menu_download" />
+        tools:ignore="MenuTitle" />
 </menu>
