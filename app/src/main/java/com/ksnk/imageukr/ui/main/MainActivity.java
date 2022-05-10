@@ -1,21 +1,32 @@
 package com.ksnk.imageukr.ui.main;
 
+import static com.google.android.gms.ads.rewarded.RewardedAd.*;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.LoadAdError;
 import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.OnUserEarnedRewardListener;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.google.android.gms.ads.rewarded.RewardItem;
+import com.google.android.gms.ads.rewarded.RewardedAd;
+import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback;
+import com.google.android.gms.ads.rewardedinterstitial.RewardedInterstitialAd;
 import com.ksnk.imageukr.R;
+import com.ksnk.imageukr.listeners.AdMobClickListener;
 import com.ksnk.imageukr.listeners.UpdateRecyclerListener;
 import com.ksnk.imageukr.ui.menu.MainPopupMenu;
 import com.ksnk.imageukr.utils.Contains;
@@ -23,7 +34,7 @@ import com.ksnk.imageukr.utils.ImagesStore;
 import com.ksnk.imageukr.ui.main.adapter.MainRecyclerViewAdapter;
 
 
-public class MainActivity extends AppCompatActivity implements UpdateRecyclerListener {
+public class MainActivity extends AppCompatActivity implements UpdateRecyclerListener, OnUserEarnedRewardListener, AdMobClickListener {
     private RecyclerView recyclerView;
     private GridLayoutManager layoutManager;
     private MainRecyclerViewAdapter mAdapter;
@@ -31,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements UpdateRecyclerLis
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     private AdView adView;
+    private RewardedAd mRewardedAd;
     private int span;
 
 
@@ -43,6 +55,39 @@ public class MainActivity extends AppCompatActivity implements UpdateRecyclerLis
         span = sharedPreferences.getInt(Contains.PREFERENCE_VARIABLE_SETTINGS, 2);
         initRecycler(span);
         initBanner();
+        initRewardBanner();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    private void initRewardBanner() {
+        AdRequest adRequest = new AdRequest.Builder().build();
+        load(this, "ca-app-pub-2981423664535117/4180062168",
+                adRequest, new RewardedAdLoadCallback() {
+                    @Override
+                    public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                        // Handle the error.
+                        Log.d("tag", loadAdError.getMessage());
+                        mRewardedAd = null;
+                    }
+
+                    @Override
+                    public void onAdLoaded(@NonNull RewardedAd rewardedAd) {
+                        mRewardedAd = rewardedAd;
+                        Log.d("tag", "Ad was loaded.");
+                    }
+                });
+    }
+
+    public void showAdsInteresting() {
+        if (mRewardedAd != null) {
+            mRewardedAd.show(this, this);
+        } else {
+            Log.d("TAG", "The interstitial ad wasn't ready yet.");
+        }
     }
 
     private void initBanner() {
@@ -78,7 +123,7 @@ public class MainActivity extends AppCompatActivity implements UpdateRecyclerLis
         ImagesStore imagesStore = new ImagesStore();
         layoutManager = new GridLayoutManager(this, span);
         recyclerView.setLayoutManager(layoutManager);
-        mAdapter = new MainRecyclerViewAdapter(imagesStore.getImagesList(), span);
+        mAdapter = new MainRecyclerViewAdapter(imagesStore.getImagesList(), span, this);
         recyclerView.setAdapter(mAdapter);
     }
 
@@ -92,5 +137,15 @@ public class MainActivity extends AppCompatActivity implements UpdateRecyclerLis
     private void initSharedPrefs() {
         sharedPreferences = getSharedPreferences(Contains.PREFERENCE_INIT, 0);
         editor = sharedPreferences.edit();
+    }
+
+    @Override
+    public void onUserEarnedReward(@NonNull RewardItem rewardItem) {
+        Log.d("tag", "tag");
+    }
+
+    @Override
+    public void clickAdmob() {
+        showAdsInteresting();
     }
 }
