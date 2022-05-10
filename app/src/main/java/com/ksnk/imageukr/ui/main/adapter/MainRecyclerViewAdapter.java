@@ -11,7 +11,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable;
 
 import com.ksnk.imageukr.R;
+import com.ksnk.imageukr.listeners.AdMobClickListener;
 import com.ksnk.imageukr.ui.images.ShowImageActivity;
+import com.ksnk.imageukr.ui.main.MainActivity;
 import com.ksnk.imageukr.utils.Contains;
 import com.squareup.picasso.Picasso;
 
@@ -20,10 +22,12 @@ import java.util.List;
 public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainViewHolder> {
     private List<String> items;
     private int settings;
+    private AdMobClickListener adMobClickListener;
 
-    public MainRecyclerViewAdapter(List<String> items, int settings) {
+    public MainRecyclerViewAdapter(List<String> items, int settings, AdMobClickListener adMobClickListener) {
         this.items = items;
         this.settings = settings;
+        this.adMobClickListener=adMobClickListener;
     }
 
     @NonNull
@@ -55,9 +59,11 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainViewHolder
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                adMobClickListener.clickAdmob();
                 Intent intent = new Intent(view.getContext(), ShowImageActivity.class);
                 intent.putExtra(Contains.URL_IMAGE, item);
                 view.getContext().startActivity(intent);
+
             }
         });
     }
