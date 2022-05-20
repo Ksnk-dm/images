@@ -43,7 +43,6 @@ public class ImagesStore {
         imageList.add("https://i.pinimg.com/564x/2f/d3/f5/2fd3f59f7378c4d7e90590dce0d74055.jpg");
         imageList.add("https://i.pinimg.com/564x/3b/8d/58/3b8d58af9078ec304ceafca77698af4c.jpg");
         imageList.add("https://i.pinimg.com/564x/a2/c9/68/a2c96818091b864bc2493d608f690d76.jpg");
-        imageList.add("https://i.pinimg.com/564x/3c/fd/19/3cfd1931f78cdf5eb112c4d87fac65bb.jpg");
         imageList.add("https://i.pinimg.com/564x/19/53/91/1953910c8fbdba82a9889e56101b1a1f.jpg");
         imageList.add("https://i.pinimg.com/564x/4e/3c/e7/4e3ce77e991b38513c78c686ba1cb887.jpg");
         imageList.add("https://i.pinimg.com/564x/b6/7f/87/b67f87277847d88cf664ef76ba7fbc82.jpg");
@@ -70,7 +69,6 @@ public class ImagesStore {
         imageList.add("https://i.pinimg.com/564x/43/04/c5/4304c50fffa3c773781a1776a06373a5.jpg");
         imageList.add("https://i.pinimg.com/564x/7b/8f/9f/7b8f9f238a8a1b429822894e74f72f63.jpg");
         imageList.add("https://i.pinimg.com/564x/53/7b/3f/537b3f32a9e4e893a9f31dc493c0c239.jpg");
-
         imageList.add("https://i.pinimg.com/564x/75/a9/ff/75a9ff40829150d076c77f34f59f3705.jpg");
         imageList.add("https://i.pinimg.com/564x/03/ed/f7/03edf78986d0f8b8ba797a19b1a8801b.jpg");
         imageList.add("https://i.pinimg.com/736x/20/32/73/203273359ad3f0100de6e68ec9b87ca1.jpg");
