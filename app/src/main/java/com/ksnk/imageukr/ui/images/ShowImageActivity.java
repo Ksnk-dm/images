@@ -46,6 +46,7 @@ public class ShowImageActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setNavigationBarColor(getResources().getColor(R.color.black));
         hideStatusBar();
         setContentView(R.layout.activity_show_image);
         if (ContextCompat.checkSelfPermission(this,
