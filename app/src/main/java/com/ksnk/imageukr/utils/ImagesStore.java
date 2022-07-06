@@ -9,6 +9,22 @@ public class ImagesStore {
 
     public List<String> getImagesList() {
         List<String> imageList = new ArrayList<>();
+        imageList.add("https://i.pinimg.com/originals/62/ef/da/62efda201fa3f565643b9cbed9efb7f0.jpg");
+        imageList.add("https://i.pinimg.com/originals/99/5f/db/995fdbf239055c7d708f8d2b6941aaaf.jpg");
+        imageList.add("https://i.pinimg.com/564x/23/eb/b4/23ebb403cc20d06ac81c59a45eaa3d77.jpg");
+        imageList.add("https://i.pinimg.com/originals/ea/aa/31/eaaa3113647fc541d1bc93f25f5e80ab.jpg");
+        imageList.add("https://i.pinimg.com/736x/f6/fa/f2/f6faf2f6c685c0697504e990dec8132e.jpg");
+        imageList.add("https://i.pinimg.com/originals/f5/6a/dd/f56add1300b6030aeae88af3d55dd2e3.jpg");
+        imageList.add("https://i.pinimg.com/originals/47/38/c4/4738c4b48726809c0f3d2cb62b5052e6.jpg");
+        imageList.add("https://i.pinimg.com/originals/e3/4a/21/e34a217c709c30441f71357b8025decc.jpg");
+        imageList.add("https://i.pinimg.com/originals/fa/ca/11/faca110e8a76ea65e8bca8f894870bf2.jpg");
+        imageList.add("https://i.pinimg.com/originals/ea/5f/0a/ea5f0aa4bb6097470cec6dca1cbd2092.jpg");
+        imageList.add("https://i.pinimg.com/originals/39/ec/51/39ec5100a984815faf24994c3cc29e89.jpg");
+        imageList.add("https://i.pinimg.com/originals/ae/ba/f8/aebaf8f4d25514e3051f70eab0a4bc5c.jpg");
+        imageList.add("https://i.pinimg.com/564x/b1/a6/5f/b1a65f679f030e865a3de7b58f987afb.jpg");
+        imageList.add("https://i.pinimg.com/originals/04/14/b2/0414b207dc81e8db2e6259eef15c2a0b.jpg");
+        imageList.add("https://i.pinimg.com/564x/ae/e0/32/aee032982ec366d7d91b12a6e780b3e2.jpg");
+
         imageList.add("https://i.pinimg.com/564x/4e/95/d9/4e95d9bba31090c0a52ba3744e4e805f.jpg");
         imageList.add("https://i.pinimg.com/originals/e8/5c/db/e85cdb0e61d030acb3bb98bf54e853eb.jpg");
 

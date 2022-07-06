@@ -146,6 +146,11 @@ public class MainActivity extends AppCompatActivity implements UpdateRecyclerLis
 
     @Override
     public void clickAdmob() {
-        showAdsInteresting();
+
+        int random = (int) (Math.random() * 3);
+        if (random == 1) {
+            showAdsInteresting();
+            initRewardBanner();
+        }
     }
 }

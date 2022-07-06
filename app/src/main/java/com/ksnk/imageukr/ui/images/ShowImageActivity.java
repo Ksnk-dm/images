@@ -175,10 +175,9 @@ public class ShowImageActivity extends AppCompatActivity {
         try {
             File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
                     System.currentTimeMillis() + ".jpg");
-            Log.d("directtt", Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/" + "image.jpg");
             file.createNewFile();
-            FileOutputStream ostream = new FileOutputStream(file);
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 75, ostream);
+            FileOutputStream fileStream = new FileOutputStream(file);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 75, fileStream);
             bmuri = FileProvider.getUriForFile(this, BuildConfig.APPLICATION_ID + ".provider", file);
         } catch (IOException e) {
             e.printStackTrace();
