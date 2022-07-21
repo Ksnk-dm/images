@@ -4,17 +4,18 @@ import static com.google.android.gms.ads.rewarded.RewardedAd.*;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.LoadAdError;
 import com.google.android.gms.ads.MobileAds;
@@ -24,23 +25,22 @@ import com.google.android.gms.ads.initialization.OnInitializationCompleteListene
 import com.google.android.gms.ads.rewarded.RewardItem;
 import com.google.android.gms.ads.rewarded.RewardedAd;
 import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback;
-import com.google.android.gms.ads.rewardedinterstitial.RewardedInterstitialAd;
+import com.ksnk.imageukr.data.Image;
 import com.ksnk.imageukr.R;
 import com.ksnk.imageukr.listeners.AdMobClickListener;
-import com.ksnk.imageukr.listeners.UpdateRecyclerListener;
+import com.ksnk.imageukr.listeners.UpdateUi;
 import com.ksnk.imageukr.ui.menu.MainPopupMenu;
-import com.ksnk.imageukr.utils.Contains;
-import com.ksnk.imageukr.utils.ImagesStore;
 import com.ksnk.imageukr.ui.main.adapter.MainRecyclerViewAdapter;
 
+import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements UpdateRecyclerListener, OnUserEarnedRewardListener, AdMobClickListener {
+
+public class MainActivity extends AppCompatActivity implements UpdateUi, OnUserEarnedRewardListener, AdMobClickListener {
     private RecyclerView recyclerView;
+    private MainViewModel mainViewModel;
     private GridLayoutManager layoutManager;
     private MainRecyclerViewAdapter mAdapter;
     private ImageButton settingImageButton;
-    private SharedPreferences sharedPreferences;
-    private SharedPreferences.Editor editor;
     private AdView adView;
     private RewardedAd mRewardedAd;
     private int span;
@@ -50,17 +50,25 @@ public class MainActivity extends AppCompatActivity implements UpdateRecyclerLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
+        checkTheme();
         init();
-        initSharedPrefs();
-        span = sharedPreferences.getInt(Contains.PREFERENCE_VARIABLE_SETTINGS, 2);
+        span = mainViewModel.getType();
         initRecycler(span);
         initBanner();
         initRewardBanner();
+        loadImages();
+        mainViewModel.retrofitGet();
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
+    private void loadImages() {
+        mainViewModel.getImageLiveData().observe(this, new Observer<List<Image>>() {
+            @Override
+            public void onChanged(List<Image> images) {
+                mAdapter.setImages(images);
+                mAdapter.notifyDataSetChanged();
+            }
+        });
     }
 
     private void initRewardBanner() {
@@ -115,29 +123,54 @@ public class MainActivity extends AppCompatActivity implements UpdateRecyclerLis
         @Override
         public void onClick(View view) {
             MainPopupMenu mainPopupMenu = new MainPopupMenu();
-            mainPopupMenu.showPopupWindow(view, MainActivity.this);
+            mainPopupMenu.showPopupWindow(view, MainActivity.this, mainViewModel);
         }
     };
 
     private void initRecycler(int span) {
-        ImagesStore imagesStore = new ImagesStore();
         layoutManager = new GridLayoutManager(this, span);
         recyclerView.setLayoutManager(layoutManager);
-        mAdapter = new MainRecyclerViewAdapter(imagesStore.getImagesList(), span, this);
+        mAdapter = new MainRecyclerViewAdapter(span, this);
         recyclerView.setAdapter(mAdapter);
     }
 
     @Override
     public void updateRecycler() {
-        mAdapter.clearListItem();
-        span = sharedPreferences.getInt(Contains.PREFERENCE_VARIABLE_SETTINGS, 2);
+        span = mainViewModel.getType();
         initRecycler(span);
+        loadImages();
     }
 
-    private void initSharedPrefs() {
-        sharedPreferences = getSharedPreferences(Contains.PREFERENCE_INIT, 0);
-        editor = sharedPreferences.edit();
+    private void checkTheme() {
+        int theme = mainViewModel.getTheme();
+        switch (theme) {
+            case 0:
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+                break;
+            case 1:
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                break;
+            case 2:
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                break;
+        }
     }
+
+    @Override
+    public void updateTheme(int theme) {
+        switch (theme) {
+            case 0:
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+                break;
+            case 1:
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                break;
+            case 2:
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                break;
+        }
+    }
+
 
     @Override
     public void onUserEarnedReward(@NonNull RewardItem rewardItem) {
@@ -146,8 +179,7 @@ public class MainActivity extends AppCompatActivity implements UpdateRecyclerLis
 
     @Override
     public void clickAdmob() {
-
-        int random = (int) (Math.random() * 3);
+        int random = (int) (Math.random() * 2);
         if (random == 1) {
             showAdsInteresting();
             initRewardBanner();

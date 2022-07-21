@@ -8,9 +8,9 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="start_bg">#FFEB3B</color>
-    <color name="end_bg">#0040FF</color>
-    <color name="status_bar">#0040FF</color>
-    <color name="nav_bar">#FFEB3B</color>
-    <color name="text_color">#FF000000</color>
+    <color name="start_bg">#FF0000</color>
+    <color name="end_bg">#020202</color>
+    <color name="status_bar">#000000</color>
+    <color name="nav_bar">#FF0000</color>
+    <color name="text_color">#FFFFFF</color>
 </resources>

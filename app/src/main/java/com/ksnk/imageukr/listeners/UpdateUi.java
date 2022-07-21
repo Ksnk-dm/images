@@ -1,5 +1,6 @@
 package com.ksnk.imageukr.listeners;
 
-public interface UpdateRecyclerListener {
+public interface UpdateUi {
     void updateRecycler();
+    void updateTheme(int theme);
 }

@@ -9,4 +9,8 @@
     <string name="menu_share">Cuota</string>
     <string name="menu_download">Descargar</string>
     <string name="popup_menu_title">Configuración de pantalla:</string>
+    <string name="theme">Tema</string>
+    <string name="system">Sistema</string>
+    <string name="dark">Oscuro</string>
+    <string name="light">Ligera</string>
 </resources>

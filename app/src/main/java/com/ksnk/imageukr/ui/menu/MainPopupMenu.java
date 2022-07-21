@@ -1,31 +1,32 @@
 package com.ksnk.imageukr.ui.menu;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
-import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 import com.ksnk.imageukr.R;
-import com.ksnk.imageukr.listeners.UpdateRecyclerListener;
-import com.ksnk.imageukr.utils.Contains;
+import com.ksnk.imageukr.listeners.UpdateUi;
+import com.ksnk.imageukr.ui.main.MainViewModel;
 
 public class MainPopupMenu {
+
     private PopupWindow popupWindow;
     private Context context;
-    private RadioButton radioButton3, radioButton2, radioButton1;
-    private SharedPreferences sharedPreferences;
-    private SharedPreferences.Editor editor;
-    private UpdateRecyclerListener updateRecyclerListener;
+    private RadioGroup visibilityRg;
+    private RadioGroup themeRg;
+    private UpdateUi updateUi;
     private int setting = 0;
+    private MainViewModel mainViewModel;
 
-    public void showPopupWindow(final View view, UpdateRecyclerListener updateRecyclerListener) {
+    public void showPopupWindow(final View view, UpdateUi updateUi, MainViewModel mainViewModel) {
         this.context = view.getContext();
-        this.updateRecyclerListener = updateRecyclerListener;
+        this.updateUi = updateUi;
+        this.mainViewModel = mainViewModel;
         LayoutInflater inflater = (LayoutInflater) view.getContext().getSystemService(view.getContext().LAYOUT_INFLATER_SERVICE);
         View popupView = inflater.inflate(R.layout.popup_menu, null);
         int width = LinearLayout.LayoutParams.WRAP_CONTENT;
@@ -35,100 +36,87 @@ public class MainPopupMenu {
         popupWindow.setAnimationStyle(R.style.animation_popup);
         popupWindow.setFocusable(true);
         popupWindow.showAtLocation(popupView, Gravity.RIGHT, 50, -900);
-        initSharedPrefs();
         initVariable(popupView);
         checkSettingStatus();
+        checkTheme();
+    }
+
+    private void checkTheme() {
+        int theme = mainViewModel.getTheme();
+        switch (theme) {
+            case 0:
+                themeRg.check(R.id.radioButtonSystem);
+                break;
+            case 1:
+                themeRg.check(R.id.radioButtonDark);
+                break;
+            case 2:
+                themeRg.check(R.id.radioButtonLight);
+                break;
+        }
     }
 
     private void checkSettingStatus() {
-        setting = sharedPreferences.getInt(Contains.PREFERENCE_VARIABLE_SETTINGS, 0);
+        setting = mainViewModel.getType();
         switch (setting) {
             case 1:
-                radioButton1.setChecked(true);
+                visibilityRg.check(R.id.radioButton1);
                 break;
             case 2:
-                radioButton2.setChecked(true);
+                visibilityRg.check(R.id.radioButton2);
                 break;
             case 3:
-                radioButton3.setChecked(true);
+                visibilityRg.check(R.id.radioButton3);
                 break;
         }
     }
 
-    private void initSharedPrefs() {
-        sharedPreferences = context.getSharedPreferences(Contains.PREFERENCE_INIT, 0);
-        editor = sharedPreferences.edit();
-    }
-
-    private final View.OnClickListener radioButton3OnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            radioButton3.setChecked(true);
-            updateRecyclerListener.updateRecycler();
-        }
-    };
-
-    private final CompoundButton.OnCheckedChangeListener radioButton3OnCheckedChangeListener = new CompoundButton.OnCheckedChangeListener() {
-        @Override
-        public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-            if (b) {
-                editor.putInt(Contains.PREFERENCE_VARIABLE_SETTINGS, 3);
-                editor.commit();
-                radioButton2.setChecked(false);
-                radioButton1.setChecked(false);
-            }
-        }
-    };
-
-    private final View.OnClickListener radioButton2OnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            radioButton2.setChecked(true);
-            updateRecyclerListener.updateRecycler();
-        }
-    };
-
-    private final CompoundButton.OnCheckedChangeListener radioButton2OnCheckedChangeListener = new CompoundButton.OnCheckedChangeListener() {
-        @Override
-        public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-            if (b) {
-                editor.putInt(Contains.PREFERENCE_VARIABLE_SETTINGS, 2);
-                editor.commit();
-                radioButton3.setChecked(false);
-                radioButton1.setChecked(false);
-            }
-        }
-    };
-
-    private final View.OnClickListener radioButton1OnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            radioButton1.setChecked(true);
-            updateRecyclerListener.updateRecycler();
-        }
-    };
-
-    private final CompoundButton.OnCheckedChangeListener radioButton1OnCheckedChangeListener = new CompoundButton.OnCheckedChangeListener() {
-        @Override
-        public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-            if (b) {
-                editor.putInt(Contains.PREFERENCE_VARIABLE_SETTINGS, 1);
-                editor.commit();
-                radioButton3.setChecked(false);
-                radioButton2.setChecked(false);
-            }
-        }
-    };
-
     private void initVariable(View view) {
-        radioButton3 = view.findViewById(R.id.radioButton3);
-        radioButton3.setOnClickListener(radioButton3OnClickListener);
-        radioButton3.setOnCheckedChangeListener(radioButton3OnCheckedChangeListener);
-        radioButton2 = view.findViewById(R.id.radioButton2);
-        radioButton2.setOnClickListener(radioButton2OnClickListener);
-        radioButton2.setOnCheckedChangeListener(radioButton2OnCheckedChangeListener);
-        radioButton1 = view.findViewById(R.id.radioButton1);
-        radioButton1.setOnClickListener(radioButton1OnClickListener);
-        radioButton1.setOnCheckedChangeListener(radioButton1OnCheckedChangeListener);
+        visibilityRg = view.findViewById(R.id.visibilityRadioGroup);
+        visibilityRg.setOnCheckedChangeListener(rgVisibilityCheckedChangeListener);
+        themeRg = view.findViewById(R.id.themeRg);
+        themeRg.setOnCheckedChangeListener(rgThemeCheckedChangeListener);
     }
+
+    private final RadioGroup.OnCheckedChangeListener rgThemeCheckedChangeListener = new RadioGroup.OnCheckedChangeListener() {
+        @SuppressLint("NonConstantResourceId")
+        @Override
+        public void onCheckedChanged(RadioGroup radioGroup, int i) {
+            switch (i) {
+                case R.id.radioButtonSystem:
+                    mainViewModel.setTheme(0);
+                    updateUi.updateTheme(0);
+                    break;
+                case R.id.radioButtonDark:
+                    mainViewModel.setTheme(1);
+                    updateUi.updateTheme(1);
+                    break;
+                case R.id.radioButtonLight:
+                    mainViewModel.setTheme(2);
+                    updateUi.updateTheme(2);
+                    break;
+            }
+        }
+    };
+
+    private final RadioGroup.OnCheckedChangeListener rgVisibilityCheckedChangeListener = new RadioGroup.OnCheckedChangeListener() {
+        @SuppressLint("NonConstantResourceId")
+        @Override
+        public void onCheckedChanged(RadioGroup radioGroup, int i) {
+            switch (i) {
+                case R.id.radioButton1:
+                    mainViewModel.setType(1);
+                    updateUi.updateRecycler();
+                    break;
+                case R.id.radioButton2:
+                    mainViewModel.setType(2);
+                    updateUi.updateRecycler();
+                    break;
+                case R.id.radioButton3:
+                    mainViewModel.setType(3);
+                    updateUi.updateRecycler();
+                    break;
+            }
+        }
+    };
 }

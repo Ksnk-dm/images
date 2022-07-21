@@ -10,22 +10,21 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable;
 
+import com.ksnk.imageukr.data.Image;
 import com.ksnk.imageukr.R;
 import com.ksnk.imageukr.listeners.AdMobClickListener;
 import com.ksnk.imageukr.ui.images.ShowImageActivity;
-import com.ksnk.imageukr.ui.main.MainActivity;
 import com.ksnk.imageukr.utils.Contains;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainViewHolder> {
-    private List<String> items;
+    private List<Image> items;
     private int settings;
     private AdMobClickListener adMobClickListener;
 
-    public MainRecyclerViewAdapter(List<String> items, int settings, AdMobClickListener adMobClickListener) {
-        this.items = items;
+    public MainRecyclerViewAdapter( int settings, AdMobClickListener adMobClickListener) {
         this.settings = settings;
         this.adMobClickListener=adMobClickListener;
     }
@@ -68,13 +67,17 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainViewHolder
         });
     }
 
+    public void setImages(List<Image> items){
+        this.items=items;
+    }
+
     @Override
     public int getItemCount() {
         return items == null ? 0 : items.size();
     }
 
     private String getItem(int position) {
-        return items.get(position);
+        return items.get(position).getUrl();
     }
 
     private void loadPicasso(String item, MainViewHolder holder) {
@@ -83,9 +86,5 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainViewHolder
         circularProgressDrawable.setCenterRadius(30f);
         circularProgressDrawable.start();
         Picasso.get().load(item).placeholder(circularProgressDrawable).into(holder.imageView);
-    }
-
-    public void clearListItem() {
-        items.clear();
     }
 }
