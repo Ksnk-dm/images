@@ -10,7 +10,7 @@ import retrofit2.http.GET;
 
 public interface ApiInterface {
 
-    @GET("callories-59b6b-default-rtdb-export.json")
+    @GET("images.ksnk")
     Call <List<Image>> getDataFromAPI();
 
 }
