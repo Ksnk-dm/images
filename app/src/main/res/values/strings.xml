@@ -10,4 +10,8 @@
     <string name="menu_download">Завантажити</string>
 
     <string name="popup_menu_title">Налаштування відображення:</string>
+    <string name="theme">Тема</string>
+    <string name="system">Системна</string>
+    <string name="dark">Темна</string>
+    <string name="light">Світла</string>
 </resources>

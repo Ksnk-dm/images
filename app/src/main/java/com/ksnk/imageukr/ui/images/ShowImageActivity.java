@@ -61,7 +61,6 @@ public class ShowImageActivity extends AppCompatActivity {
                 );
             }
         }
-        //  checkPermission();
         init();
         setImage();
     }
